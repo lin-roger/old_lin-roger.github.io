@@ -1,34 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>四資管一A書籍訂購查詢系統</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        .home{
+
+        .home {
             width: 300px;
             height: 256px;
             margin: auto;
             margin-top: 15%;
             padding: 25px;
             background-color: aliceblue;
-            line-height: 1.95em;
+            line-height: 2em;
         }
     </style>
 </head>
+
 <body>
     <div class="home">
         <h1>書籍訂購查詢系統</h1>
         <h2>請輸入學號後三碼</h2>
-        <p></p>
+        <div class="head">
+            <input class="number"></textarea>
+            <button class="enter" onclick="transform()">查詢</button>
+        </div>
+        <div class="report">
+            <h3>查詢結果:</h3>
+            <p class="output" style="line-height: 1em;">jhbhjvhjv s</p>
+            <button class="reset" onclick="transform()">重新查詢</button>
+        </div>
     </div>
+
     <script>
-        
+        const enter = document.querySelector('.enter');
+        const number = document.querySelector('.number');
+        const head = document.querySelector('.head')
+        const report = document.querySelector('.report');
+        const reset = document.querySelector('.reset')
+
+        let nfcfbnh;
+
+        report.style.visibility = 'hidden'
+        number.focus();
+
+        enter.addEventListener('click', ser);
+        function ser() {
+            number.disabled = true;
+            enter.disabled = true;
+            report.style.visibility = 'visible'
+        }
+
+        reset.addEventListener('click', res);
+        function res() {
+            number.disabled = false;
+            enter.disabled = false;
+            report.style.visibility = 'hidden'
+        }
+
+
     </script>
 </body>
+
 </html>
