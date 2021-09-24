@@ -47,8 +47,6 @@
         const output = document.querySelector('.output')
         const reset = document.querySelector('.reset');
 
-        let nfcfbnh;
-
         report.style.visibility = 'hidden'
         number.focus();
 
@@ -72,15 +70,16 @@
             }*/
 
             function serFN(x) {
-                if (x.number.find(element => element = number.value) === parseInt(number.value, 10)) {
+                let par = x.number.find(element => element = number.value);
+                if (par === number.value) {
                     output.innerHTML = output.innerHTML + x.tag + ' ';
                     allprice = allprice + x.price;
                 }
             }
 
             serFN(b1);
-            serFN(b2);
-            serFN(b3);
+           // serFN(b2);
+            //serFN(b3);
 
             if (allprice != 0) {
                 output.innerHTML = output.innerHTML + '<br>共 ' + allprice + ' 元';
@@ -95,6 +94,7 @@
             number.disabled = false;
             enter.disabled = false;
             report.style.visibility = 'hidden';
+            output.innerHTML=''
             number.value = '';
             number.focus();
             //output.innerHTML = '沒有資料';
@@ -111,17 +111,17 @@
         b1 = {
             tag: '管理學課本',
             price: 750,
-            number: [003, 006, 011, 014, 027, 022, 023, 024, 025, 028, 030, 033, 040, 044, 046, 047, 059, 026, 034, 037, 048, 049, 057, 064, 050, 007]
+            number: ['003', '006', '011', '014', '027', '022', '023', '024', '025', '028', '030', '033', '040', '044', '046', '047', '059', '026', '034', '037', '048', '049', '057', '064', '050', '007']
         }
         b2 = {
             tag: '計概課本',
             price: 1170,
-            number: [003, 007, 014, 015, 020, 022, 023, 024, 027, 036, 039, 040, 044, 046, 047, 051, 054, 056, 059, 002, 026, 032, 034, 048, 064, 050, 049]
+            number: ['003', '007', '014', '015', '020', '022', '023', '024', '027', '036', '039', '040', '044', '046', '047', '051', '054', '056', '059', '002', '026', '032', '034', '048', '064', '050', '049']
         }
         b3 = {
             tag: '微積分課本',
             price: 578,
-            number: [003, 006, 007, 015, 018, 020, 022, 023, 024, 025, 027, 040, 044, 045, 047, 051, 058, 026, 032, 034, 048, 064, 050, 049]
+            number: ['003', '006', '007', '015', '018', '020', '022', '023', '024', '025', '027', '040', '044', '045', '047', '051', '058', '026', '032', '034', '048', '064', '050', '049']
         }
 
     </script>
