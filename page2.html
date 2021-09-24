@@ -70,7 +70,7 @@
             }*/
 
             function serFN(x) {
-                let par = x.number.find(element => element = number.value);
+                let par = x.number.find(element => element === number.value);
                 if (par === number.value) {
                     output.innerHTML = output.innerHTML + x.tag + ' ';
                     allprice = allprice + x.price;
@@ -78,8 +78,8 @@
             }
 
             serFN(b1);
-           // serFN(b2);
-            //serFN(b3);
+            serFN(b2);
+            serFN(b3);
 
             if (allprice != 0) {
                 output.innerHTML = output.innerHTML + '<br>共 ' + allprice + ' 元';
@@ -94,7 +94,7 @@
             number.disabled = false;
             enter.disabled = false;
             report.style.visibility = 'hidden';
-            output.innerHTML=''
+            output.innerHTML = ''
             number.value = '';
             number.focus();
             //output.innerHTML = '沒有資料';
