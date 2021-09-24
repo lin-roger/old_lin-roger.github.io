@@ -29,13 +29,13 @@
         <h1>書籍訂購查詢系統</h1>
         <h2>請輸入學號後三碼</h2>
         <div class="head">
-            <input class="number"></textarea>
-            <button class="enter" onclick="transform()">查詢</button>
+            <input type="number" class="number"></textarea>
+            <button class="enter">查詢</button>
         </div>
         <div class="report">
             <h3>查詢結果:</h3>
-            <p class="output" style="line-height: 1em;">jhbhjvhjv s</p>
-            <button class="reset" onclick="transform()">重新查詢</button>
+            <p class="output" style="line-height: 1em;"></p>
+            <button class="reset">重新查詢</button>
         </div>
     </div>
 
@@ -44,7 +44,8 @@
         const number = document.querySelector('.number');
         const head = document.querySelector('.head')
         const report = document.querySelector('.report');
-        const reset = document.querySelector('.reset')
+        const output = document.querySelector('.output')
+        const reset = document.querySelector('.reset');
 
         let nfcfbnh;
 
@@ -52,19 +53,76 @@
         number.focus();
 
         enter.addEventListener('click', ser);
+
+        number.addEventListener('keydown', function (e) {
+            if (e.keyCode === 13) {
+                ser();
+            };
+        });
+
         function ser() {
+            let allprice = 0;
             number.disabled = true;
             enter.disabled = true;
-            report.style.visibility = 'visible'
+            report.style.visibility = 'visible';
+
+            /*if (data.number.find(element => element = number.value) === number.value) {
+                output.innerHTML = output.innerHTML + data.tag;
+                allprice = allprice + data.price;
+            }*/
+
+            function serFN(x) {
+                if (x.number.find(element => element = number.value) === parseInt(number.value, 10)) {
+                    output.innerHTML = output.innerHTML + x.tag + ' ';
+                    allprice = allprice + x.price;
+                }
+            }
+
+            serFN(b1);
+            serFN(b2);
+            serFN(b3);
+
+            if (allprice != 0) {
+                output.innerHTML = output.innerHTML + '<br>共 ' + allprice + ' 元';
+            }
+            else {
+                output.innerHTML = '沒有資料';
+            }
         }
 
         reset.addEventListener('click', res);
         function res() {
             number.disabled = false;
             enter.disabled = false;
-            report.style.visibility = 'hidden'
+            report.style.visibility = 'hidden';
+            number.value = '';
+            number.focus();
+            //output.innerHTML = '沒有資料';
         }
 
+        /*
+        book = {
+            tag: '',
+            price: ,
+            number: []
+        }
+        */
+
+        b1 = {
+            tag: '管理學課本',
+            price: 750,
+            number: [003, 006, 011, 014, 027, 022, 023, 024, 025, 028, 030, 033, 040, 044, 046, 047, 059, 026, 034, 037, 048, 049, 057, 064, 050, 007]
+        }
+        b2 = {
+            tag: '計概課本',
+            price: 1170,
+            number: [003, 007, 014, 015, 020, 022, 023, 024, 027, 036, 039, 040, 044, 046, 047, 051, 054, 056, 059, 002, 026, 032, 034, 048, 064, 050, 049]
+        }
+        b3 = {
+            tag: '微積分課本',
+            price: 578,
+            number: [003, 006, 007, 015, 018, 020, 022, 023, 024, 025, 027, 040, 044, 045, 047, 051, 058, 026, 032, 034, 048, 064, 050, 049]
+        }
 
     </script>
 </body>
