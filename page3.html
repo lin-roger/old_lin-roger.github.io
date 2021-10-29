@@ -17,23 +17,33 @@
       body {
         background-color: #5f9ea0;
       }
-      .flo {
-        position: fixed;
-        width: 75px;
-        height: 75px;
-        background: #5f9ea0;
-        bottom: 5%;
-        right: 10%;
-        border-radius: 50%;
-        display: flex;
-      }
       .flo a {
+        position: fixed;
+        bottom: 7.5%;
+        right: 10%;
+        display: flex;
+        animation: anmt 2s ease-in-out infinite;
+      }
+      @keyframes anmt {
+        0% {
+          transform: translate(0);
+        }
+        50% {
+          transform: translate(0, 20px);
+        }
+        100% {
+          transform: translate(0);
+        }
+      }
+      a {
+        font-family: "Noto Sans TC", sans-serif;
         margin: auto;
         text-decoration-line: none;
         color: #000000;
         font-size: 18px;
         font-weight: bold;
       }
+
       .map {
         width: 70%;
         height: 512px;
@@ -54,7 +64,7 @@
       .page1 {
         background-color: cadetblue;
         max-width: 100%;
-        font-family: 'Noto Sans TC', sans-serif;
+        font-family: "Noto Sans TC", sans-serif;
         font-weight: 400;
       }
 
@@ -102,7 +112,7 @@
       }
 
       .page2 .post {
-        margin: 10% 0;
+        margin: auto 0;
         padding: 1em 1em 1em 4em;
         width: 540px;
       }
@@ -113,16 +123,30 @@
       }
 
       .page2 .post p {
-        margin-top: 10%;
+        margin: 10% 0 5% 0;
         line-height: 2em;
         font-size: 24px;
         font-weight: 300;
         max-width: 100%;
       }
+      .page2 .post a {
+        padding: 5px 8px 6px 8px;
+        background-color: #8fced0;
+        font-size: 24px;
+        font-weight: 500;
+        border-radius: 5%;
+        transition: 500ms;
+        text-decoration-color: chartreuse;
+      }
+      .page2 .post a:hover {
+        text-decoration-line: underline;
+        text-decoration-thickness: 5px;
+        background-color: #fff;
+      }
 
       .end {
         background-color: #5f9ea0;
-        font-family: 'Noto Sans TC', sans-serif;
+        font-family: "Noto Sans TC", sans-serif;
         font-weight: 400;
       }
 
@@ -133,7 +157,8 @@
         display: flex;
       }
 
-      .end h1, h2{
+      .end h1,
+      h2 {
         font-weight: 400;
       }
 
@@ -186,6 +211,10 @@
           line-height: 2em;
           font-size: 18px;
           max-width: 100%;
+        }
+
+        .page2 .post a {
+          font-size: 18px;
         }
 
         .end .box {
@@ -309,7 +338,7 @@
             <a href="#1">品牌故事</a>
             <a href="#2">製醬美學</a>
             <a href="#3">產品介紹</a>
-            <a href="#4">立即購買</a>
+            <a href="https://www.pinkoi.com/">立即購買</a>
             <a href="#5">常見問題</a>
             <a href="#6">聯絡我們</a>
           </div>
@@ -377,6 +406,7 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit fugit
             obcaecati porro mollitia soluta cumque?
           </p>
+          <a id="bt" href="https://www.pinkoi.com/">pinkoi 購買</a>
         </div>
       </div>
 
@@ -405,9 +435,10 @@
           </div>
         </div>
       </div>
-      <div class="flo">
-        <a href="#top">Top ↑</a>
-      </div>
     </div>
+    <div class="flo">
+      <a href="#top">Top ↑</a>
+    </div>
+    <script></script>
   </body>
 </html>
