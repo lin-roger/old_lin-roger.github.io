@@ -8,328 +8,7 @@
     <title>西螺醬油</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
-    </style>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      html, body { 
-        scroll-behavior:smooth; 
-      }
-      body {
-        background-color: #5f9ea0;
-      }
-      .flo a {
-        position: fixed;
-        bottom: 7.5%;
-        right: 10%;
-        display: flex;
-        font-weight: 600;
-        animation: anmt 2s ease-in-out infinite;
-      }
-      @keyframes anmt {
-        0% {
-          transform: translate(0);
-        }
-        50% {
-          transform: translate(0, 20px);
-        }
-        100% {
-          transform: translate(0);
-        }
-      }
-      a {
-        font-family: "Noto Sans TC", sans-serif;
-        margin: auto;
-        text-decoration-line: none;
-        color: #000000;
-        font-size: 18px;
-      }
-
-      .map {
-        width: 70%;
-        height: 512px;
-        margin: 50px auto;
-      }
-      iframe {
-        object-fit: contain;
-      }
-
-      .basic {
-        background-color: #fff;
-      }
-
-      img {
-        max-width: 100%;
-      }
-
-      .page1 {
-        background-color: cadetblue;
-        max-width: 100%;
-        font-family: "Noto Sans TC", sans-serif;
-        font-weight: 400;
-      }
-
-      .page1 .box {
-        display: flex;
-        width: 1080px;
-        margin: 0 auto;
-      }
-
-      .page1 .link {
-        width: 65%;
-        margin: auto 0 auto auto;
-        display: flex;
-      }
-
-      .page1 h1 {
-        padding: 10px 0;
-        margin-left: 0.5em;
-      }
-
-      .page1 a {
-        margin: auto;
-        text-decoration-line: none;
-        color: #000000;
-        font-size: 22px;
-        transition: 400ms;
-      }
-
-      .page1 a:hover {
-        font-size: 24px;
-      }
-
-      .page2 {
-        background-color: #fff;
-        font-family: "Noto Sans TC";
-        margin: 50px auto;
-        width: 1080px;
-        display: flex;
-        max-width: 100%;
-      }
-
-      .page2 .box {
-        padding: 1em;
-        width: 540px;
-      }
-
-      .page2 .post {
-        margin: auto 0;
-        padding: 1em 1em 1em 4em;
-        width: 540px;
-      }
-
-      .page2 .post h1 {
-        font-size: 60px;
-        font-weight: 400;
-      }
-
-      .page2 .post p {
-        margin: 10% 0 5% 0;
-        line-height: 2em;
-        font-size: 24px;
-        font-weight: 300;
-        max-width: 100%;
-      }
-      .page2 .post a {
-        padding: 5px 10px 8px 10px;
-        background-color: #8fced0;
-        font-size: 24px;
-        font-weight: 500;
-        border-radius: 10px;
-        transition: 250ms;
-        text-decoration-color: chartreuse;
-      }
-      .page2 .post a:hover {
-        text-decoration-line: underline;
-        text-decoration-thickness: 5px;
-        background-color: #fff;
-      }
-
-      .end {
-        background-color: #5f9ea0;
-        font-family: "Noto Sans TC", sans-serif;
-        font-weight: 400;
-      }
-
-      .end .box {
-        margin: auto;
-        padding: 50px 0;
-        width: 1080px;
-        display: flex;
-      }
-
-      .end h1,
-      h2 {
-        font-weight: 400;
-      }
-
-      .end a {
-        margin: auto 5% auto auto;
-        text-decoration-line: none;
-        color: #000000;
-        font-size: 18px;
-        /* font-weight: bold; */
-        transition: 500ms;
-      }
-
-      .end a:hover {
-        font-size: 24px;
-      }
-
-      /*RWD*/
-      @media (max-width: 1080px) {
-        .page1 .box {
-          max-width: 540px;
-        }
-
-        .page1 .link {
-          width: 70%;
-        }
-
-        .page1 .link a {
-          font-size: 22px;
-        }
-
-        .page2 {
-          max-width: 540px;
-        }
-
-        .page2 .box {
-          width: 240px;
-        }
-
-        .page2 .post {
-          width: 240px;
-          padding: 1em 1em 1em 2em;
-        }
-
-        .page2 .post h1 {
-          font-size: 45px;
-        }
-
-        .page2 .post p {
-          margin-top: 10%;
-          line-height: 2em;
-          font-size: 18px;
-          max-width: 100%;
-        }
-
-        .page2 .post a {
-          font-size: 18px;
-        }
-
-        .end .box {
-          max-width: 510px;
-          
-        }
-      }
-
-      @media (max-width: 540px) {
-        .page1 .box {
-          max-width: 90%;
-        }
-
-        .page1 h1 {
-          font-size: 24px;
-        }
-
-        .page1 .link {
-          width: 72.5%;
-        }
-
-        .page1 .link a {
-          width: 35px;
-          font-size: 13px;
-          padding: 0 5px;
-        }
-
-        .page2 {
-          margin: 10% auto;
-          max-width: 80%;
-          display: block;
-        }
-
-        .page2 .box {
-          width: 100%;
-          padding: 0;
-          margin: 0;
-        }
-
-        .page2 .post {
-          width: 100%;
-          padding: 0;
-          margin: 5% 0;
-        }
-
-        .page2 .post h1 {
-          font-size: 30px;
-        }
-
-        .page2 .post p {
-          margin-top: 2.5%;
-          line-height: 1.65em;
-          font-size: 18px;
-          max-width: 100%;
-        }
-
-        .end .box {
-          max-width: 80%;
-        }
-      }
-
-      @media (max-width: 340px) {
-        .page1 .box {
-          max-width: 100%;
-        }
-
-        .page1 h1 {
-          font-size: 20px;
-        }
-
-        .page1 .link {
-          width: 75%;
-        }
-
-        .page1 .link a {
-          font-size: 8px;
-          padding: 0 4px;
-        }
-
-        .page2 {
-          margin: 10% auto;
-          max-width: 80%;
-          display: block;
-        }
-
-        .page2 .box {
-          width: 100%;
-          padding: 0;
-          margin: 0;
-        }
-
-        .page2 .post {
-          width: 100%;
-          padding: 0;
-          margin: 5% 0;
-        }
-
-        .page2 .post h1 {
-          font-size: 30px;
-        }
-
-        .page2 .post p {
-          margin-top: 2.5%;
-          line-height: 1.65em;
-          font-size: 18px;
-          max-width: 100%;
-        }
-
-        .end .box {
-          max-width: 80%;
-        }
-      }
+      @import url("css/a.css");
     </style>
   </head>
 
@@ -411,6 +90,8 @@
             obcaecati porro mollitia soluta cumque?
           </p>
           <a id="bt" href="https://www.pinkoi.com/">pinkoi 購買</a>
+          <!-- <a id="bt" class="buttom" href="">內部購買</a> -->
+          <button class="buttom">內部購買</button>
         </div>
       </div>
 
@@ -443,6 +124,49 @@
     <div class="flo">
       <a href="#top">Top ↑</a>
     </div>
-    <script></script>
+
+    <div class="filter">
+      <div class="shop">
+        <button class="close">x</button>
+        <div class="item">
+          <div class="item-left">
+            <h1>西螺醬油高級</h1>
+            <p>
+              Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <div class="img-box">
+            <img src="https://fakeimg.pl/80x80/" alt="" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-left">
+            <h1>西螺醬油中級</h1>
+            <p>
+              Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <div class="img-box">
+            <img src="https://fakeimg.pl/80x80/" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const enter = document.querySelector(".buttom");
+      const shop = document.querySelector(".filter");
+      const close = document.querySelector(".close");
+
+      enter.addEventListener("click", src);
+      close.addEventListener("click", closef);
+
+      function src() {
+        shop.style.visibility = "visible";
+      }
+      function closef() {
+        shop.style.visibility = "hidden";
+      }
+    </script>
   </body>
 </html>
