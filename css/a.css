@@ -287,6 +287,11 @@ h2 {
   font-size: 18px;
 }
 
+button:disabled{
+  color: #fff;
+  background-color: #fff;
+}
+
 /*RWD*/
 @media (max-width: 1080px) {
   .page1 .box {
