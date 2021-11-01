@@ -206,7 +206,7 @@ h2 {
   top: 5px;
   right: 5px;
 }
-.shop button {
+.shop > button {
   background-color: #8fced0;
   border: none;
   color: #000000;
@@ -218,7 +218,7 @@ h2 {
   border-radius: 10px;
   transition: 250ms;
 }
-.shop button:hover {
+.shop > button:hover {
   background-color: #fafafa;
   color: chartreuse;
 }
@@ -267,6 +267,24 @@ h2 {
 }
 .shop .item .img-box {
   padding: 5px;
+}
+.shop .item .item-num {
+  display: flex;
+}
+.item-num button {
+  margin: 0 3px;
+  font-size: 18px;
+  background-color: #8fced0;
+  border: none;
+  color: #000000;
+  padding: 0 4px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.item-num p {
+  text-align: center;
+  font-size: 18px;
 }
 
 /*RWD*/
