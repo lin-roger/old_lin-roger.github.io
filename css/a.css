@@ -143,6 +143,11 @@ img {
   background-color: #fff;
 }
 
+.page2 .sp{
+  width: 1px;
+  height: 10px;
+}
+
 .end {
   background-color: #5f9ea0;
   font-family: "Noto Sans TC", sans-serif;
