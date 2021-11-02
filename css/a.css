@@ -101,6 +101,13 @@ img {
 .page2 .box {
   padding: 1em;
   width: 540px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page2 .box img{
+  margin: auto 0;
 }
 
 .page2 .post {
