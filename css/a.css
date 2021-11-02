@@ -320,13 +320,13 @@ button:disabled{
   }
 
   .page2 .post h1 {
-    font-size: 45px;
+    font-size: 30px;
   }
 
   .page2 .post p {
-    margin-top: 10%;
-    line-height: 2em;
-    font-size: 18px;
+    margin-top: 2.5%;
+    line-height: 1.5em;
+    font-size: 16px;
     max-width: 100%;
   }
 
