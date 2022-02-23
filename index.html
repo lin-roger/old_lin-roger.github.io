@@ -1,377 +1,260 @@
-/* CSS reset */
-*,
-*::after,
-*::before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+<!DOCTYPE html>
+<html lang="en">
 
-*,
-button,
-input,
-select,
-textarea {
-  font-family: "Roboto", sans-serif;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="../重構/style.css" >
+    <title>Document</title>
+</head>
 
-/* reset end */
+<body>
+    <div id="app">
+        <heads></heads>
+        <maincontainer></maincontainer>
+    </div>
 
-body {
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
 
-i {
-  display: block;
-}
+                }
+            },
 
-/* I::before {
-    display: none;
-} */
+        })
 
-img {
-  max-width: 100%;
-}
+        app.component('heads', {
+            data() {
+                return {
 
-header {
-  width: 100%;
-  height: 44px;
-  background-color: #fff;
+                }
+            },
+            template: `
+            <header>
+                <nav>
+                    <headbuttons></headbuttons>
+                    <headserch></headserch>
+                    <headdesktop></headdesktop>
 
-  display: flex;
-  justify-content: center;
+                </nav>
+            </header>
+            `
+        })
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
+        app.component('headbuttons', {
+            data() {
+                return {
 
-header::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
+                }
+            },
+            template: `
+            <div class='headbuttons'>
+                <a class="headerhome">
+                    <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="">
+                </a>
+            </div>
+            `
+        })
 
-  width: 100%;
-  height: 1px;
-  background-color: #dbdbdb;
-}
+        app.component('headserch', {
+            data() {
+                return {
 
-header nav {
-  width: 100%;
-  max-width: 975px;
+                }
+            },
+            template: `
+                <div class='headserch'>
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+            `
+        })
 
-  padding: 0 14px;
+        app.component('headdesktop', {
+            data() {
+                return {
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+                }
+            },
+            template: `
+            <div class='headbuttons'>
+                <awithsvg href='' svg='bi bi-house-door' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
+                <awithsvg href='' svg='bi bi-plus-square' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
+                <awithsvg href='' svg='bi bi-heart' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
+            </div>
+                `
+        })
 
-.headerhome {
-  margin-top: 5px;
-}
+        // app.component('headmobile', {
+        //     data() {
+        //         return {
 
-.headserch {
-  width: 216px;
-  height: 28px;
-  margin: 0 2%;
+        //         }
+        //     },
+        //     template: `
+        //     <div class='header__buttons'>
+        //         <awithsvg href='' svg='' styles='' ></awithsvg>
+        //         <awithsvg href='' svg='' styles='' ></awithsvg>
+        //         <awithsvg href='' svg='' styles='' ></awithsvg>
+        //     </div>
+        //     `
+        // })
 
-  align-items: center;
-  position: relative;
-}
+        app.component('awithsvg', {
+            data() {
+                return {
 
-.headserch i {
-  width: 12px;
-  height: 12px;
+                }
+            },
+            props: [
+                'href', 'svg', 'styles'
+            ],
+            computed: {
+                hrefs() {
+                    if (typeof (this.href) == "undefined") {
+                        return '#';
+                    } else {
+                        return '#' + this.href;
+                    }
+                }
+            },
+            template: `
+            <a :href=hrefs>
+                <i :class=svg :style=styles ></i>
+            </a>
+            `
+        })
 
-  position: absolute;
-  top: 6px;
-  left: 8px;
-}
+        app.component('maincontainer', {
+            data() {
+                return {
 
-.headserch input {
-  width: 100%;
-  height: 100%;
-  background-color: #efefef;
+                }
+            },
+            template: `
+            <main>
+                <section>
+                    <div class='posts'>
+                        <post v-for="i in 1"></post>
+                    </div>
+                </section>
+            </main>
+            `
+        })
 
-  padding: 4px 10px 4px 32px;
-  border: 1px solid #efefef;
-  border-radius: 4px;
-  outline: none;
+        app.component('post', {
+            data() {
+                return {
 
-  font-size: 12px;
-  font-weight: 300;
-  text-decoration: none;
-  color: #000;
+                }
+            },
+            template: `
+            <article class='post'>
+                <posthead></posthead>
+                <postcont></postcont>
+                <postfoot></postfoot>
+            </article>
+            `
+        })
 
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
+        app.component('posthead', {
+            data() {
+                return {
 
-.headbuttons {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  gap: 16px;
-}
 
-main {
-  background-color: #fafafa;
+                }
+            },
+            template: `
+            <div class='posthead'>
+                <div class="post__profile">
+                    <a href="#" class="post__avatar">
+                        <img src="../instagram-clone/assets/default-user.png" alt="User Picture" />
+                    </a>
+                    <a href="#" class="post__user">usernick1</a>
+                </div>
+                <button class="post__more-options">
+                    <i class="bi bi-three-dots"></i>
+                </button>
+            </div>
+            `
+        })
 
-  margin-top: 44px;
-  margin-bottom: 44px;
+        app.component('postcont', {
+            data() {
+                return {
 
-  display: flex;
-  flex: 5;
-}
+                }
+            },
+            template: `
+            <div class='postcont'>
+                <div class="post__medias">
+                    <img class="post__media" src="../instagram-clone/assets/insta-clone.png" alt="Post Content" />
+                </div>
+            </div>
+            `
+        })
 
-main section {
-  width: 100%;
-  max-width: 935px;
+        app.component('postfoot', {
+            data() {
+                return {
 
-  padding: 0 0 8px;
+                }
+            },
+            template: `
+            <div class='postfoot'>
+                <div class="post__buttons">
+                    <button class="post__button">
+                        <i class="bi bi-heart"></i>
+                    </button>
+                
+                    <div class="post__indicators"></div>
+                
+                    <button class="post__button">
+                        <i class="bi bi-chat"></i>
+                    </button>
+                    <button class="post__button">
+                        <i class="bi bi-share"></i>
+                    </button>
+                </div>
 
-  margin: 0 auto;
-  display: flex;
-}
+                <div class="post__infos">
+                    <div class="post__likes">
+                        <a href="#" class="post__likes-avatar">
+                            <img src="../instagram-clone/assets/default-user.png" alt="User Picture" />
+                        </a>
+                    
+                        <span>Liked by
+                            <a class="post__name--underline" href="#">user123</a> and
+                            <a href="#">73 others</a></span>
+                    </div>
+                
+                    <div class="post__description">
+                        <span>
+                            <a class="post__name--underline" href="#">usernick1</a>
+                            Multiple media post example. This post has three images!
+                        </span>
+                    </div>
+                
+                    <span class="post__date-time">1 hour ago</span>
+                </div>
+            </div>
+            `
+        })
 
-.posts {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 8px;
-}
+        app.mount('#app')
+    </script>
+</body>
 
-.post {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
+</html>
 
-.posthead {
-  background-color: #fff;
-  border-bottom: 1px solid #dbdbdb;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-}
 
-.post__profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
 
-.post__avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-}
 
-.post__avatar::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+<div>
+</div>
 
-  border: 1px solid #1a1a1a;
-  border-radius: 50%;
-}
-
-.post__user {
-  font-size: 14px;
-  font-weight: 500;
-  color: #262626;
-  text-decoration: none;
-  text-transform: lowercase;
-}
-.post__user:hover {
-  text-decoration: underline;
-}
-.post__more-options {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.postcont {
-  display: flex;
-  position: relative;
-}
-
-.post__medias {
-  display: flex;
-  overflow-y: hidden;
-  overflow-x: auto;
-
-  width: 100%;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-.post__medias::-webkit-scrollbar {
-  display: none;
-}
-.post__media {
-  width: 100%;
-  flex: none;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-.postfoot {
-  background-color: var(--primary);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0 4px;
-}
-.post__buttons {
-  display: flex;
-  position: relative;
-}
-.post__button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-
-  padding: 8px;
-}
-.post__button--align-right {
-  margin-left: auto;
-}
-.post__indicators {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -100%);
-}
-.post__indicator {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--text-light);
-}
-.post__indicator--active {
-  background-color: var(--link);
-}
-
-.post__infos {
-  display: flex;
-  flex-direction: column;
-  padding: 0 8px;
-  gap: 10px;
-}
-.post__likes,
-.post__description {
-  display: flex;
-}
-.post__likes {
-  align-items: center;
-  gap: 6px;
-}
-.post__likes-avatar {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-}
-.post__likes-avatar::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  border: 1px solid var(--img-border);
-  border-radius: 50%;
-}
-.post__likes span,
-.post__description span {
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--text-dark);
-}
-.post__likes a,
-.post__description a {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-dark);
-  text-decoration: none;
-}
-.post__name--underline:hover {
-  text-decoration: underline;
-}
-.post__date-time {
-  font-size: 10px;
-  font-weight: 400;
-  color: var(--text-light);
-  text-transform: uppercase;
-}
-
-/* RWD */
-@media (max-width: 767px) {
-  .header__buttons--desktop {
-    display: none;
-  }
-
-  /* Fix post medias indicators bugs on mobile */
-  .post__medias {
-    gap: 1px;
-  }
-}
-
-@media (min-width: 620px) {
-  main section {
-    padding: 30px 0 24px;
-  }
-
-  .posts {
-    gap: 24px;
-  }
-  .post {
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
-  }
-  .postfoot {
-    padding: 4px 8px 12px;
-  }
-  .post__date-time {
-    margin-top: 6px;
-  }
-}
-
-@media (min-width: 768px) {
-  header nav {
-    padding: 0 20px;
-  }
-}
-
-@media (min-width: 1024px) {
-  main {
-    background-color: #fafafa;
-  }
-
-  .posts {
-    margin: unset;
-  }
-}
