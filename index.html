@@ -14,32 +14,30 @@
     <div id="app">
         <heads></heads>
         <maincontainer></maincontainer>
-        <newpost v-if="newpost"></newpost>
+        <newpost v-if="visble"></newpost>
     </div>
 
     <script src="https://unpkg.com/vue@3"></script>
     <script>
-
         const app = Vue.createApp({
             data() {
                 return {
-                    newposts:false
+                    visble: false
                 }
             },
-            
-            computed: {
+            methods: {
+                visblechange() {
+                    console.log('khbfh')
+                    this.visble = !this.visble;
+                    if (this.visble) {
+                        document.body.style['overflow-y'] = 'hidden';
+                    } else {
+                        document.body.style['overflow-y'] = 'auto';
+                    }
 
+                }
             },
         })
-
-        function visblenewpost(){
-            app.newposts = !app.newposts;
-            if (newposts) {
-                document.body.style['overflow-y'] = 'hidden';
-            } else {
-                document.body.style['overflow-y'] = 'auto';
-            }
-        }
 
         app.component('heads', {
             data() {
@@ -93,21 +91,15 @@
 
                 }
             },
-            methods:{
-                newpostclick(){
-                    visblenewpost();
-                    console.log(newposts);
-                }
-            },
             template: `
             <div class='headbuttons'>
                 <awithsvg href='' svg='bi bi-house-door' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
-                <awithsvg href='' @click="newpostclick" svg='bi bi-plus-square' styles='font-size: 1.5rem; font-weight: 500; color: #000;'></awithsvg>
+                <awithsvg href='' @click="$root.visblechange()" svg='bi bi-plus-square' styles='font-size: 1.5rem; font-weight: 500; color: #000;'></awithsvg>
                 <awithsvg href='' svg='bi bi-heart' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
             </div>
                 `
         })
-        
+
         // app.component('headmobile', {
         //     data() {
         //         return {
@@ -273,7 +265,7 @@
             template: `
             <div class="fliter">
                 <div class="close">
-                    <button class="close-button">
+                    <button class="close-button" @click="$root.visblechange()">
                         <i class="bi bi-x-lg" style="color: #fff;"></i>
                     </button>
                 </div>
