@@ -15,6 +15,11 @@ textarea {
   font-family: "Roboto", sans-serif;
 }
 
+textarea {
+  border: none;
+}
+
+
 /* reset end */
 
 body {
@@ -22,7 +27,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  
 }
 
 i {
@@ -31,6 +36,10 @@ i {
 
 /* I::before {
     display: none;
+} */
+
+/* #app {
+  overflow-y: hidden;
 } */
 
 img {
@@ -326,7 +335,141 @@ main section {
   font-weight: 400;
   color: var(--text-light);
   text-transform: uppercase;
+  
 }
+
+
+.fliter {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px) brightness(20%);
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.close {
+  position: fixed;
+  right: 20px;
+  top: 15px;
+}
+
+.close button {
+  background-color: unset;
+  border: none;
+}
+.close i {
+  font-size: 36px;
+}
+
+.newpost {
+  position: fixed;
+  width: 75%;
+  max-width: 540px;
+  height: 75%;
+  max-height: 540px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.newpost_form {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 20px;
+  border-width: 1px;
+  border-color: #000;
+  /* box-shadow: 5px 5px 3px teal; */
+
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 400;
+}
+.newpost_head {
+  display:flex;
+  height: 10%;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.newpost_head p{
+  font-weight: 700;
+  margin: auto;
+}
+
+.newpost_img{
+  width: 100%;
+  height: 50%;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  padding: 5px;
+}
+
+ .newpost_img img {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border: none;
+  object-fit: contain;
+} 
+
+.newpost_img i {
+  margin: auto;
+  position: absolute;
+  top:25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.newpost_conten{
+  height: 80%;
+}
+
+.newpost_footer{
+  height: 10%;
+}
+
+.newpost_footer button {
+  background-color: #fff;
+  border-radius: 20px;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.newpost_para {
+  width: 100%;
+  height: 50%;
+  border-bottom: 1px solid #dbdbdb;
+  padding: 10PX;
+  background-color: #fff;
+}
+.newpost_para textarea {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-size: large;
+}
+
+.newpost_para textarea::focus {
+  background-color: #000;
+  border: none;
+}
+
+.newpost_para textarea::-webkit-resizer {
+  display: none;
+}
+
+
+/* .newpost_head p ::after {
+
+}
+.newpost_head p ::before {
+
+} */
+
+
 
 /* RWD */
 @media (max-width: 767px) {

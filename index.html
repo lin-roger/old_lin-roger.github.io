@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="./style.css" >
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Document</title>
 </head>
 
@@ -14,18 +14,32 @@
     <div id="app">
         <heads></heads>
         <maincontainer></maincontainer>
+        <newpost v-if="newpost"></newpost>
     </div>
 
     <script src="https://unpkg.com/vue@3"></script>
     <script>
+
         const app = Vue.createApp({
             data() {
                 return {
-
+                    newposts:false
                 }
             },
+            
+            computed: {
 
+            },
         })
+
+        function visblenewpost(){
+            app.newposts = !app.newposts;
+            if (newposts) {
+                document.body.style['overflow-y'] = 'hidden';
+            } else {
+                document.body.style['overflow-y'] = 'auto';
+            }
+        }
 
         app.component('heads', {
             data() {
@@ -39,7 +53,6 @@
                     <headbuttons></headbuttons>
                     <headserch></headserch>
                     <headdesktop></headdesktop>
-
                 </nav>
             </header>
             `
@@ -80,15 +93,21 @@
 
                 }
             },
+            methods:{
+                newpostclick(){
+                    visblenewpost();
+                    console.log(newposts);
+                }
+            },
             template: `
             <div class='headbuttons'>
                 <awithsvg href='' svg='bi bi-house-door' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
-                <awithsvg href='' svg='bi bi-plus-square' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
+                <awithsvg href='' @click="newpostclick" svg='bi bi-plus-square' styles='font-size: 1.5rem; font-weight: 500; color: #000;'></awithsvg>
                 <awithsvg href='' svg='bi bi-heart' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
             </div>
                 `
         })
-
+        
         // app.component('headmobile', {
         //     data() {
         //         return {
@@ -139,7 +158,7 @@
             <main>
                 <section>
                     <div class='posts'>
-                        <post v-for="i in 1"></post>
+                        <post v-for="i in 5"></post>
                     </div>
                 </section>
             </main>
@@ -245,16 +264,47 @@
             `
         })
 
+        app.component("newpost", {
+            data() {
+                return {
+
+                }
+            },
+            template: `
+            <div class="fliter">
+                <div class="close">
+                    <button class="close-button">
+                        <i class="bi bi-x-lg" style="color: #fff;"></i>
+                    </button>
+                </div>
+                <div class="newpost">
+                    <div class="newpost_form">
+                        <div class="newpost_head">
+                            <div></div>
+                            <p>新增貼文</p>
+                            <div></div>
+                        </div>
+                        <div class="newpost_conten">
+                            <div class="newpost_img">
+                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBcRERESERESEQ8SEg8aEQ8SERISDw8SGBQZGRkVGRgcJTwlHB4sIBgYJjgmLC8xNUM1GiQ7QDs0Py42NTEBDAwMEA8QGA8RHjErJCs3Pz8/QDc0MTE0PD9ANEAxND8xMTExNDExMT83PDExNDQxMTExMT80MTQxND8xMTExMf/AABEIAH4BjwMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAUBAgYDB//EADsQAAICAQIDBgQEBQQBBQEAAAECAAMRBBITIVEFFCIxQaEGUmGRMjVxtCMkQnKBFTNiscGk0dTw8Rb/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAgH/xAAXEQEBAQEAAAAAAAAAAAAAAAAAAREC/9oADAMBAAIRAxEAPwD5jERAREQEREBERASz7G11en32PUb7jlErZmSpaXRktbcp3byrFV9BuLHOAJWRA6DtHtKjUbFF2r09NZzTpq9JphXS3LxKUsXLcvxkbpF1Ha5XVrqq34tgXxNdQtXEc1mty6I5ySpyWDAkkmVGZmB1v/8AQ0cCk2JvvpeqyrTV0mrS12VIyVo7MzMyAsWPXbjlmUnaHaI1NSNbubWoxXjea30MWYB/+ascAjzVsH8IMrYgdP2b8T90alNM2oFQenj232l7eEHUslVanZUpAYf1Mc+Y8pEbt3+FqVL6uyy9LEPE1O7TIjWq+5UIzu2qF8/Un6SjiAiJgsB5nAgTez9aKBc6qTqGqZKHzhaS/hd+u/YWVSPIsT6CSru0UqrFOj3oN9b26pwqX32IdyBVXlWit4guSSQCTyxKkRAse0NTVfZXZtel7GPe1RVKBty5tpBPItlyUPIEcjg8rrTfEtHGrd9PbUNLXYmjahkd1pap0VLVYgOwLM+8EHLMMEYxykQLbtPWi6sbtbqb3TmiW6SutcnkTvW045fQzXQ6qnuz03m4BtTTZmlUZ9qU3J/WQPN1/wAZlXEC/v1Whemio/6iBSbyGFely3EZSc+L02CVukGn3WG9tRsB/h11LWLLBk43OxITkBnCt58vKQogXo+JnVVpSiruC5/kH3PW+SCXdz4jZy5OCMegA5GvvsqTUJZpxZwFepxXZtNiEMCybhycDHJsDkRkSFEC+1er0dlllnE7TXiO77Qulwu9i2B4/LnIHaDacqOC+rZ8jJ1C0bAnPy2sTnOOXl5yBECz1/aKcPu2lRq9NuVrGcg6jV2KOTWFeQUZO1ByGSSSTmNJ2ghq7vqld6VLtTahHH0tjDnt3cnRiBuQ46gg+dZECdRbWuk1SF3Oo1CVoKwg4SKlyWFzZuyfwYxt9fOdBZ8Vs7atO83U1XWaY0WLWrtRWm7eNmRnOV5ZnIxAvbe0qre021btYlA1CWrtrV7X2MhVSu4Bd23zycdDJeg+JKqjQj0O+nS9NVaVKjULrRbv31k8igRVTBxkbjyOJy8QJuqroLqa77irueJv0qI1SE5yMWneR08P6z31XaNaVtTo0eutyhtvtZTqtRsYMikr4a0DANtXPMAljiVcQLTWa+vUoz3I9etC/wC/WFNWqbI52ocbXI83U8/MrnnJeg7cSmumsJZapZG1TO+10CFyiafafBsax3DHmXI5ADnQRA6DT9s001vplrsv02oIOsssK16lyDlOFglUKHxZbduYnOBiQ9Jr66a9XUKhqFubT8PiixBtrZjlwjhgxDDkGI85VxAstXrlv1RuLPpUK1DNQNj1bKFr8ILKSDt9Wzg+Z9ZDdsoms0t9NbNVpE0yVpYVD2CpcFn25C7iScDPnKWIFrqu1jqO6o4r0y6c2Ys0tKpt3urFhWpA3AqPIj9ZjtfV1vXpaanssWhdTuusQVtY9tu84Tc2AOQyTz5yriAiIgJe/A/5lpP7r/21kope/A/5lpP7r/21kCiiIgIiICIiAiIgJ0XwxoCK9TrCVHBrdKFP43tcpWzqPUIlwOTy3Mk52W3YFgVdaSeQ0ZP/AKvTE4+uB7QOn7P7GakZpa+zT16rVJwV7I0moZlpswc2s24qc7d2BzDADlKSjTVjtYJw2NZttc6fUUImwMj2KjV5ZSoyuOoA5CXt3bFNb3PrKamOqFtdIVr7L6dFZY1gtuRbMKuShCLtY+Py9aTs+jh9p6ZSmmpQhijUOx0ro1dgW0O7MQD65IxjBAOYHrpLNy6c2Wdl0vqVVq6m7HrsODY1YJZayoyyN6yL20udMC9WnS6rtDW0u+n09VAda66uRCKMjczEZ6yVo0KJp1duxbW06qtVlmufeALGsAO1wpwzsfL1kftpSNGpe3T22Xdo621u73JbWpeqnOSD4eYPn6YgWfw/oVD6C3/TgX77pq7dx1q2VnehS8KX2spw5PhCgrjyIkTtXQKumNv+ncO223UCva2uY11LyN7bnKjL5ABGDtY+QkvsLtg6XU6asayzV32ajSpZZx7W0Wmqa1BYqFj/ABHIJBbG0AnGfMQdd2q2s4m/WW0ald6uj32rpNYi5AIwdqWbQAQ2FY45hiQQ17ASltHrQyahrh3UvsFboALWKME2klRglwfQGdhpdJUgR1soodrdJmlez9Pp9YRwLS1GdoKcRk3LnDYAA5ld3G6LW309l6pkfgoW04osrKV3PYLWZ/EvjbAA8zgADE7TtPtFBbenGbedZTtUdodmIeHts3YDrlUyUyreInGPIwOO7AoVu1VrtFz2G5nS3c2mtW5A1u5lcE/iTGG/WWaaIUrrtXZoTR/L2KNMNZW5sGosRXsqZUO1ERnBxuxvHliVtZLa3tK4tuavvtdG5xua65n09Cpk+QDMegCegkqqldNbprr3r7vpNGlWppV0sfUWOLGbSKinxEpau5vwrzOcgCBU9paOnvWlppSypbF0Ju328RlfUJW5UeEbdocj1z9J0DaCmx0sNN1S6DU0UCl7FsbW11La6pWmxS1jugGBu/3GPpKXXp/PU6sWLbp9Tq0sS7coZALkZq7EzlGQMqkHlgAgkSV8R69XovQa9tU57SV60LXbqaxXqBlN/wDSCyDK8uYgQdSlWor12oWq+m+tq7G4mpS5Ha7UBHUqKlKkbifP0lHOm1drto9VfqFrSzVp2cqMrrxNWyWb2vZAxIYqq7mwBkj1JlNb2eU0tWp3jFttyCraysuwKSwJ5Mp3Y5eRGPPkAhSz+H0RriLhSaGRls41ldTKrYG+p35CxThh1AIPImVkmdlVs1hKpprCqnKaqyuqo55Z8Trk/QGBef6dU1Ghqs1ek2036w6jh6vTiw1WGnbtJbG4hG9eX19fHTaMv2uKraKFLO/8tXtbTKDQz1qP6WXGw59eZPmYZHwf5XsY8vLvVH/yJI1moSvtpnsZUpXbvesh1UHQhcKQcHmcDn/mBt2r2ci06Z9TpGru4F1ly6FtNUiouoKB3AVgeTIMjyzz+kDt00cDRcJNQrnSnYXsqZdne9TncFUEtnPMEDGOXKSF1yKezq+zxZc1deqrejUIqG0W2Oz1OFbaVZGPk3TyIkDt7TtUuiqcbbK9JixNysyM2q1LANtJwdrKcdGECpiIgIiICIiAiIgIiICIiAiIgIiICIiAl78D/mWk/uv/AG1kope/A/5lpP7r/wBtZAooiICIiAiIgIiICYImYgYAxGJmICIiAIiIgY2jOcDPX1gCZiBjH0gCZiBjEzEQMAfSZJ8vp5fQZzEQEREBAERAwRnz8oVQOQGB0EzEBERAREQEREBERAREQEREBERAREQEREBL34H/ADLSf3X/ALayUUvfgf8AMtJ/df8AtrIFFERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBL34H/MtJ/df+2slFL34H/MtJ/df+2sgczvPUxvPUzWIG289TG89TNZlVJ8gT+kDO89TG89TNuE3yt9jHCb5W+xga7z1Mbz1M24TfK32McJvlb7GBrvPUxvPUzbhN8rfYxwm+VvsYGu89TG89TNuE3yt9jHCb5W+xga7z1Mbz1M24TfK32McJvlb7GBrvPUxvPUzbhN8rfYxwm+VvsYGu89TG89TNuE3yt9jHCb5W+xga7z1Mbz1M24TfK32McJvlb7GBrvPUxvPUzbhN8rfYxwm+VvsYGu89TG89TNuE3yt9jHCb5W+xga7z1Mbz1M24TfK32McJvlb7GBrvPUxvPUzbhN8rfYxwm+VvsYGu89TG89TNuE3yt9jHCb5W+xga7z1Mbz1M24TfK32McJvlb7GBrvPUxvPUzbhN8rfYxwm+VvsYGu89TG89TNuE3yt9jHCb5W+xga7z1Mbz1M24TfK32McJvlb7GBrvPUxvPUzbhN8rfYzVkI8wR+ogN56mN56maxA23nqY3nqZrEDbeepjeepmsQNt56mN56maxA23nqZ0HwExPael5+t/wC3snOzofgH8z0v63/t7IHPREQJGmo3cz+H/uTlXAwBgTCLtAHQTZfMfqICJd66hu9Wju6shvfxFX/CXP1x5fSQdTXZhga9qAn8NaryB6gZky7JW2ZbEKJ76bbhicE88oykBl/4uOYb/wC/SZ1SH+HyP+2np1LH/oiUxHieunsIIUKhyw/EiseZx6yZbWd7hBpyAz7VHCLYBOBjzziBXRJegTe7HciuQdgPJdzZGcAcgoyf8CSdJShWzBrKYA3ubd2N4PMDlnA8h/7wKuJ7avG87NuzkF25wABgZJAyepnjARN6Ad64G45HhwDn6YPKWiLuzkLhVbhoKa+M53c/AfRcnOOn64CoiSu0G/iEZU88ttREZCScoSPMj9ZMRkswNtR24wMsX4aqfCSB+LkOePUwKmJP7Qbkua1DsWLuK3QM2c+EsAfXnFWM1nFb4S3D4GRtqY7HU8iQcEE//gQIns2pYgghMEeldYP3A5T20umDJu2F24hXAsCYG0H18zzgQ4lmbF2DFfh4TbgznlssYD+n8WW5H/lIdAIrsPgZceJDneOYAdTjlgsPXrA8IlrWwIz/AA9hbT5Y11ZRSrlx+Hzyp9pXIjOx2jJOSfJVUepPoBA84nrZp2XGVyG/CykMrHoCORP0nm6FSVYYYHBHQ9IGIiICIiAiIgIiICIiAmCMzMQIWp0+PEvl6jpIstiJVuuCR0JgaxEQEREBERATofgH8z0v63/t7Jz06H4B/M9L+t/7eyBz0zMRAtlORnrMr5j9RImlu/pP+D/4koQLHtLA1tpOABqXJPQcQ85AsxuYj5m/7m+ouNjvY2N7szNgYGWOTynnJ5mSStt22pWncqoLXMic8JW7b25+WByX9T9jPZ9YbSfG1T/04d+GwHIKefhOPXyP0lfEpj30xCfxCRuU+BP6i45gnooOD9cYmdJyPEZlAAfluG9m2kABfPzIkeIEjRWBN5JQZXHjRnJB8woHL9cyWmqGzBs8nfaGayshdqeS18gM5lZECXeFs1DeMBGc5fzAGPPmZEiIG1aBmAJCqSMsfJR6mWFWqG1yprQlwAbDZvKYPmyeI+Q+krYgTO0Ld2z/AG2JQFmQHO7cwwWbxHljzntpteMlcuAUcA2XNsB2nGdoGOcrYgS9RgoxJqDZXaKyXdjnnkkk4xn2maWVSi5UZrtLufIM9bBVz0Hh/wAkyHED2bT4BPErOAeQY5P0HKe2ndVFQJJIcvgYwGyoCsT5DCZz9ZDiBYI6GsVcTADqzuRhXGfEq8s8uRGfM5+kjaZ0HEDkhWQYwMsSHVsDp+HznhECamufhv8AxH3b68eM5xh8/wDiQ3ckkkkk+ZJ5t+vWYiBvVcyZ2OyZ89rFc/aaREBERAREQEREBERAREQEREBKuxssx6kyXqbto2j8R9hIMBERAREQEREBOh+AfzPS/rf+3snPTofgH8z0v63/ALeyBz0TMQMT1TUMvrkfXnPOIEjvbdB7x3tug95HiBI723Qe8d7boPeR4gSO9t0HvHe26D3keIEjvbdB7x3tug95HiBI723Qe8d7boPeR4gSO9t0HvHe26D3keIEjvbdB7x3tug95HiBI723Qe8d7boPeR4gSO9t0HvHe26D3keIEjvbdB7x3tug95HiBI723Qe8d7boPeR4gSO9t0HvHe26D3keIEjvbdB7x3tug95HiBI723Qe8d7boPeR4gSO9t0HvHe26D3keIEjvbdB7x3tug95HiBI723Qe8d7boPeR4gSO9t0HvNH1LH1x+k8ogJiZiBiJmIGImYgYiZiBidD8A/mel/W/wDb2Tn50HwD+Z6X9b/29kD/2Q==" alt="">
+                                <i class="bi bi-upload"></i>
+                            </div>
+                            <div class="newpost_para">
+                                <textarea name="" id="" cols="30" rows="10" placeholder="撰寫貼文"></textarea>
+                            </div>
+                        </div>
+                        <div class="newpost_footer">
+                            <button>上傳</button>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+            `
+        })
+
         app.mount('#app')
     </script>
 </body>
 
 </html>
-
-
-
-
-
-<div>
-</div>
-
