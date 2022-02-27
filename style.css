@@ -404,7 +404,7 @@ main section {
   border-bottom: 1px solid #dbdbdb;
   display: flex;
   flex-direction: column;
-  padding: 10%;
+  padding: 5%;
 }
 
  .newpost_img img {
