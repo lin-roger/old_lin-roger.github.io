@@ -424,7 +424,6 @@ main section {
   margin: 2% 0;
   justify-content: center;
   align-items: center;
-  
 }
 
 .newpost_conten {
@@ -521,20 +520,31 @@ main section {
   }
 }
 
+
+@media (max-height: 512px) {
+  .newpost_conten {
+      height: 70%;
+    }
+    .newpost_img {
+        height: 60%;
+    }
+    .newpost_para {
+        height: 40%;
+    }
+    
+    .newpost_footer {
+    height: 15%;
+  }
+  .newpost_head {
+      height: 15%;
+    }
+}
+
 @media (max-height: 300px) {
-  .newpost_img{
+  .newpost_img {
     display: none;
   }
-  .newpost_conten{
-    height: 60%;
-  }
-  .newpost_para{
-      height: 100%;
-  }
-  .newpost_footer{
-    height: 20%;
-  }
-  .newpost_head{
-    height: 20%;
+  .newpost_para {
+    height: 100%;
   }
 }
