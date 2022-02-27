@@ -403,7 +403,8 @@ main section {
   height: 50%;
   border-bottom: 1px solid #dbdbdb;
   display: flex;
-  padding: 5px;
+  flex-direction: column;
+  padding: 10%;
 }
 
  .newpost_img img {
@@ -414,12 +415,24 @@ main section {
   object-fit: contain;
 } 
 
-.newpost_img i {
+.newpost_img i,
+.newpost_img p,
+.newpost_img button {
   margin: auto;
-  position: absolute;
-  top:25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+}
+
+.newpost_img i {
+  font-size: 48px;
+  flex-grow:2;
+}
+
+.newpost_img p,
+.newpost_img button {
+  flex-grow:1;
+}
+
+.newpost_img button {
+  flex-basis: 12px;
 }
 
 .newpost_conten{
