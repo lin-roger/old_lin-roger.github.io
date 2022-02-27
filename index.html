@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="./test.css">
     <title>Document</title>
 </head>
 
@@ -22,7 +22,8 @@
         const app = Vue.createApp({
             data() {
                 return {
-                    visble: false
+                    visble: false,
+                    vh: true,
                 }
             },
             methods: {
@@ -34,10 +35,15 @@
                     } else {
                         document.body.style['overflow-y'] = 'auto';
                     }
-
+                },
+                vhs() {
+                    console.log('jhgvg');
+                    this.vh = 300 < window.screen.availHeight;
                 }
             },
         })
+
+        console.log(app)
 
         app.component('heads', {
             data() {
@@ -262,6 +268,7 @@
 
                 }
             },
+
             template: `
             <div class="fliter">
                 <div class="close">
@@ -277,7 +284,7 @@
                             <div></div>
                         </div>
                         <div class="newpost_conten">
-                            <div class="newpost_img">
+                            <div class="newpost_img" v-if="$root.vh">
                                 <div class="someth">
                                    <i class="bi bi-upload"></i>
                                    <p>把相片拖到這裡</p>
@@ -291,14 +298,19 @@
                         <div class="newpost_footer">
                             <button>上傳</button>
                         </div>
-                    
                     </div>
                 </div>
             </div>
             `
         })
+        function reportWindowSize() {
+            console.log(app.vh);
+        }
+
+        window.addEventListener('resize', reportWindowSize);
 
         app.mount('#app')
+
     </script>
 </body>
 

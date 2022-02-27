@@ -445,7 +445,7 @@ main section {
 
 .newpost_para {
   width: 100%;
-  /* height: 50%; */
+  height: 50%;
   border-bottom: 1px solid #dbdbdb;
   padding: 10px;
   background-color: #fff;
@@ -524,5 +524,17 @@ main section {
 @media (max-height: 300px) {
   .newpost_img{
     display: none;
+  }
+  .newpost_conten{
+    height: 60%;
+  }
+  .newpost_para{
+      height: 100%;
+  }
+  .newpost_footer{
+    height: 20%;
+  }
+  .newpost_head{
+    height: 20%;
   }
 }
