@@ -422,7 +422,7 @@ main section {
 }
 
 .newpost_img i {
-  font-size: 48px;
+  font-size: 5vh;
   flex-grow:2;
 }
 
