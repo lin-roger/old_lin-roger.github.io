@@ -246,6 +246,7 @@ main section {
   flex-direction: column;
   gap: 4px;
   padding: 0 4px;
+  margin-bottom: 5px;
 }
 
 .postfoot i {

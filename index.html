@@ -135,9 +135,14 @@
 
                 }
             },
+            methods:{
+                a(){
+                    location.reload(true);
+                }
+            },
             template: `
             <div class='headbuttons'>
-                <awithsvg href='' svg='bi bi-house-door' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
+                <awithsvg href='' @click='a' svg='bi bi-house-door' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
                 <awithsvg href='' @click="$root.visblechange()" svg='bi bi-plus-square' styles='font-size: 1.5rem; font-weight: 500; color: #000;'></awithsvg>
                 <awithsvg href='' svg='bi bi-heart' styles='font-size: 1.5rem; font-weight: 500; color: #000;' ></awithsvg>
             </div>
@@ -327,6 +332,7 @@
                             this.postpara = ''
                             this.src = ''
                             this.file = ''
+                            location.reload(true);
                         });
                     });
 
