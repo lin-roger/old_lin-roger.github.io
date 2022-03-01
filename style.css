@@ -240,15 +240,22 @@ main section {
 }
 
 .postfoot {
-  background-color: var(--primary);
+  border-top: 1px solid #dbdbdd;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: 0 4px;
 }
+
+.postfoot i {
+  font-size: 24px;
+}
+
 .post__buttons {
   display: flex;
   position: relative;
+  height: 50%;
 }
 .post__button {
   background-color: transparent;
@@ -400,7 +407,16 @@ main section {
   border-bottom: 1px solid #dbdbdb;
   display: flex;
   flex-direction: column;
-  padding: 5%;
+}
+
+.newpost_img button {
+  border: none;
+  color: #fff;
+  background-color: #0095f6;
+  padding: 5px;
+  border-radius: 5px;
+  line-height: 18px;
+
 }
 
 .newpost_img img {
@@ -424,7 +440,6 @@ main section {
   margin: 2% 0;
   justify-content: center;
   align-items: center;
-  
 }
 
 .newpost_conten {
@@ -521,8 +536,31 @@ main section {
   }
 }
 
+
+@media (max-height: 512px) {
+  .newpost_conten {
+      height: 70%;
+    }
+    .newpost_img {
+        height: 60%;
+    }
+    .newpost_para {
+        height: 40%;
+    }
+    
+    .newpost_footer {
+    height: 15%;
+  }
+  .newpost_head {
+      height: 15%;
+    }
+}
+
 @media (max-height: 300px) {
-  .newpost_img{
+  .newpost_img {
     display: none;
+  }
+  .newpost_para {
+    height: 100%;
   }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <div>
+            <button @click="$refs.file.click()">從電腦選擇相片</button>
+            <input style="display:none" ref="file" type="file" @change="fileSelected" />
+        </div>
+        <img v-if="image" :src="image" width="300" />
+        <br />
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    image: '',
+                }
+            },
+            methods: {
+                fileSelected(event) {
+                    const file = event.target.files.item(0); //取得File物件
+                    const reader = new FileReader(); //建立FileReader 監聽 Load 事件
+                    reader.addEventListener('load', this.imageLoader);
+                    reader.readAsDataURL(file);
+                },
+                imageLoader(event) {
+                    this.image = event.target.result;
+                }
+            },
+
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

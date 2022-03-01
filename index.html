@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="./test.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <title>Document</title>
 </head>
 
@@ -18,34 +18,72 @@
     </div>
 
     <script src="https://unpkg.com/vue@3"></script>
-    <script>
-        const app = Vue.createApp({
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-analytics.js";
+        import { getDatabase, ref, set, onValue, push, child, get } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js"
+        import { getStorage, uploadBytes, ref as Sref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-storage.js"
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCy5lslr5DMKgPjsHvlFR1BxgFrfyzfLJw",
+            authDomain: "test-2ae8c.firebaseapp.com",
+            databaseURL: "https://test-2ae8c-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "test-2ae8c",
+            storageBucket: "test-2ae8c.appspot.com",
+            messagingSenderId: "489171593882",
+            appId: "1:489171593882:web:ffd782e5c51a41358c4d23",
+            measurementId: "G-Q2GB1118T0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const storage = getStorage(app);
+
+        const rdb = getDatabase(app);
+        const starCountRef = ref(rdb, 'postimg');
+
+        // function datacall(){
+        //     get(starCountRef).then((result) => {
+        //         console.log(result.val());
+        //     })
+        // };
+        // datacall()
+
+        function _uuid() {
+            var d = Date.now();
+            if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+                d += performance.now(); //use high-precision timer if available
+            }
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = (d + Math.random() * 16) % 16 | 0;
+                d = Math.floor(d / 16);
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+        }
+
+        const vapp = Vue.createApp({
             data() {
                 return {
                     visble: false,
                     vh: true,
+
                 }
             },
             methods: {
                 visblechange() {
-                    console.log('khbfh')
                     this.visble = !this.visble;
                     if (this.visble) {
                         document.body.style['overflow-y'] = 'hidden';
                     } else {
                         document.body.style['overflow-y'] = 'auto';
                     }
-                },
-                vhs() {
-                    console.log('jhgvg');
-                    this.vh = 300 < window.screen.availHeight;
                 }
             },
         })
 
-        console.log(app)
 
-        app.component('heads', {
+        vapp.component('heads', {
             data() {
                 return {
 
@@ -62,7 +100,7 @@
             `
         })
 
-        app.component('headbuttons', {
+        vapp.component('headbuttons', {
             data() {
                 return {
 
@@ -77,7 +115,7 @@
             `
         })
 
-        app.component('headserch', {
+        vapp.component('headserch', {
             data() {
                 return {
 
@@ -91,7 +129,7 @@
             `
         })
 
-        app.component('headdesktop', {
+        vapp.component('headdesktop', {
             data() {
                 return {
 
@@ -121,7 +159,7 @@
         //     `
         // })
 
-        app.component('awithsvg', {
+        vapp.component('awithsvg', {
             data() {
                 return {
 
@@ -146,52 +184,53 @@
             `
         })
 
-        app.component('maincontainer', {
+        vapp.component('maincontainer', {
             data() {
                 return {
-
+                    datalist:''
+                }
+            },
+            mounted(){
+                    this.datacall()
+            },
+            methods: {
+                datacall() {
+                    get(starCountRef).then((result) => {
+                        console.log('nuiwdc')
+                        this.datalist=Object.values(result.val()).reverse();
+                        console.log(result.val());
+                    })
                 }
             },
             template: `
             <main>
                 <section>
                     <div class='posts'>
-                        <post v-for="i in 5"></post>
+                        <article v-for="(i,j,k) in datalist" class='post'>
+                            <posthead :name=i.username></posthead>
+                            <postcont :src=i.img></postcont>
+                            <postfoot :name=i.username :para=i.para :time=i.time></postfoot>
+                        </article>
                     </div>
                 </section>
             </main>
             `
         })
 
-        app.component('post', {
+        vapp.component('posthead', {
             data() {
                 return {
 
                 }
             },
-            template: `
-            <article class='post'>
-                <posthead></posthead>
-                <postcont></postcont>
-                <postfoot></postfoot>
-            </article>
-            `
-        })
-
-        app.component('posthead', {
-            data() {
-                return {
-
-
-                }
-            },
+            props:['name'],
             template: `
             <div class='posthead'>
                 <div class="post__profile">
                     <a href="#" class="post__avatar">
-                        <img src="../instagram-clone/assets/default-user.png" alt="User Picture" />
+                        <img src="./img/default-user.png" />
                     </a>
-                    <a href="#" class="post__user">usernick1</a>
+                    <a href="#" class="post__user">{{name}}</a>
                 </div>
                 <button class="post__more-options">
                     <i class="bi bi-three-dots"></i>
@@ -200,25 +239,38 @@
             `
         })
 
-        app.component('postcont', {
+        vapp.component('postcont', {
             data() {
                 return {
 
                 }
             },
+            props:['src'],
             template: `
             <div class='postcont'>
                 <div class="post__medias">
-                    <img class="post__media" src="../instagram-clone/assets/insta-clone.png" alt="Post Content" />
+                    <img class="post__media" :src="src" alt="Post Content" />
                 </div>
             </div>
-            `
+            `,
         })
 
-        app.component('postfoot', {
+        vapp.component('postfoot', {
             data() {
                 return {
 
+                }
+            },
+            props:['name', 'para', 'time'],
+            computed:{
+                timeago:{
+                    get(){
+                        if (Math.floor((Date.now()-this.time)/1000)<60) {
+                            return String(Math.floor((Date.now()-this.time)/1000)+' 秒前');
+                        } else {
+                            return String(Math.floor((Date.now()-this.time)/1000/60)+' 分鐘前');
+                        }
+                    }
                 }
             },
             template: `
@@ -239,36 +291,58 @@
                 </div>
 
                 <div class="post__infos">
-                    <div class="post__likes">
-                        <a href="#" class="post__likes-avatar">
-                            <img src="../instagram-clone/assets/default-user.png" alt="User Picture" />
-                        </a>
-                    
-                        <span>Liked by
-                            <a class="post__name--underline" href="#">user123</a> and
-                            <a href="#">73 others</a></span>
-                    </div>
-                
                     <div class="post__description">
                         <span>
-                            <a class="post__name--underline" href="#">usernick1</a>
-                            Multiple media post example. This post has three images!
+                            <a class="post__name--underline" href="#">{{name}}</a>
+                            {{para}}
                         </span>
                     </div>
                 
-                    <span class="post__date-time">1 hour ago</span>
+                    <span class="post__date-time">{{timeago}}</span>
                 </div>
             </div>
             `
         })
 
-        app.component("newpost", {
+        vapp.component("newpost", {
             data() {
                 return {
-
+                    imgshow: true,
+                    postpara: '',
+                    src: '',
+                    file: ''
                 }
             },
+            methods: {
+                handleFileUpload() {
+                    uploadBytes(Sref(storage, 'postimg/' + _uuid()), this.file).then((snapshot) => {
+                        getDownloadURL(snapshot.ref).then((url) => {
+                            set(push(starCountRef), {
+                                username: 'none',
+                                userimg: 'none',
+                                img: url,
+                                para: this.postpara,
+                                time: Date.now()
+                            });
+                            this.postpara = ''
+                            this.src = ''
+                            this.file = ''
+                        });
+                    });
 
+                    this.$root.visblechange()
+                },
+                fileSelected(event) {
+                    this.file = event.target.files.item(0); //取得File物件
+                    const reader = new FileReader(); //建立FileReader 監聽 Load 事件
+                    reader.addEventListener('load', this.imageLoader);
+                    reader.readAsDataURL(this.file);
+                },
+                imageLoader(event) {
+                    this.src = event.target.result;
+                    this.imgshow = false;
+                }
+            },
             template: `
             <div class="fliter">
                 <div class="close">
@@ -285,33 +359,42 @@
                         </div>
                         <div class="newpost_conten">
                             <div class="newpost_img" v-if="$root.vh">
-                                <div class="someth">
+                                <div class="someth" v-if='imgshow'>
                                    <i class="bi bi-upload"></i>
                                    <p>把相片拖到這裡</p>
-                                   <button>從電腦選擇相片</button>
+                                   <button class="btn btn-info" @click="$refs.file.click()">從電腦選擇相片</button>
+                                   <input style="display:none" ref="file" type="file" @change="fileSelected">
                                 </div>
+                                <img v-else :src='src' alt="">
                             </div>
                             <div class="newpost_para">
-                                <textarea name="" id="" cols="30" rows="10" placeholder="撰寫貼文"></textarea>
+                                <textarea v-model='postpara' name="" id="" cols="30" rows="10" placeholder="撰寫貼文"></textarea>
                             </div>
                         </div>
                         <div class="newpost_footer">
-                            <button>上傳</button>
+                            <button @click='handleFileUpload()'>上傳</button>
                         </div>
                     </div>
                 </div>
             </div>
             `
         })
-        function reportWindowSize() {
-            console.log(app.vh);
-        }
 
-        window.addEventListener('resize', reportWindowSize);
-
-        app.mount('#app')
+        vapp.mount('#app')
 
     </script>
 </body>
 
 </html>
+
+<!-- 
+<div class="post__likes">
+    <a href="#" class="post__likes-avatar">
+        <img src="../instagram-clone/assets/default-user.png" alt="User Picture" />
+    </a>
+
+    <span>Liked by
+        <a class="post__name--underline" href="#">user123</a> and
+        <a href="#">73 others</a></span>
+</div>
+ -->
