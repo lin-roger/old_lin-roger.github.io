@@ -46,7 +46,7 @@ img {
 
 header {
   width: 100%;
-  height: 44px;
+  height: 60px;
   background-color: #fff;
 
   display: flex;
@@ -85,7 +85,7 @@ header nav {
 
 .headserch {
   width: 216px;
-  height: 28px;
+  height: 36px;
   margin: 0 2%;
 
   align-items: center;
@@ -97,8 +97,9 @@ header nav {
   height: 12px;
 
   position: absolute;
-  top: 6px;
+  top: 10px;
   left: 8px;
+  color: #757575;
 }
 
 .headserch input {
@@ -131,8 +132,8 @@ header nav {
 main {
   background-color: #fafafa;
 
-  margin-top: 44px;
-  margin-bottom: 44px;
+  margin-top: 60px;
+  margin-bottom: 0;
 
   display: flex;
   flex: 5;
@@ -140,7 +141,8 @@ main {
 
 main section {
   width: 100%;
-  max-width: 935px;
+  max-width: 600px;
+  /* max-width: 935px; */
 
   padding: 0 0 8px;
 
@@ -417,7 +419,6 @@ main section {
   padding: 5px;
   border-radius: 5px;
   line-height: 18px;
-
 }
 
 .newpost_img img {
@@ -482,19 +483,126 @@ main section {
   display: none;
 }
 
-/* .newpost_head p ::after {
-
+.login {
+  position: fixed;
+  background-color: #fff;
+  height: 384px;
+  width: 75%;
+  max-width: 384px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  display: flex;
 }
-.newpost_head p ::before {
 
+.loginform {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  width: 75%;
+}
+
+.loginform .loginitem {
+  height: 15%;
+  width: 100%;
+  margin: auto;
+}
+.loginitem a,
+.loginitem button,
+.loginitem input {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  /* text-align: center; */
+  display: block;
+}
+
+
+.loginitem h1 {
+  /* text-decoration: underline #ff3028 5px; */
+  font-size:24px;
+}
+
+/* .loginitem h1::after {
+  content: "";
+  position: absolute;
+  width: 25%;
+  height: 5px;
+  
+  top: 10%;
+  left: 13.2%;
+  background-color: #0095f6;
 } */
+
+input {
+  outline: none;
+  border: 1px solid #a8a8a8;
+  border-radius: 5px;
+  padding: 4px 10px;
+}
+
+.loginitem input:focus {
+  border: 1px solid #a8a8a8;
+}
+
+.loginitem .loginck {
+  border: none;
+  border-radius: 5px;
+  background-color: #0095f6;
+  color: #fff;
+  font-size: medium;
+}
+
+.loginitem .forgot {
+  border: 1px solid #a8a8a8;
+  border-radius: 5px;
+  background-color: #fff;
+  
+  color: #757575;
+  font-weight: 400;
+
+  font-size: small;
+  width: 50%;
+  
+  margin: auto;
+  margin-right: 1%;
+}
+
+.loginitem .newadmin {
+  border: 1px solid #a8a8a8;
+  border-radius: 5px;
+  background-color: #fff;
+
+  color: #757575;
+  font-weight: 400;
+
+  font-size: small;
+  width: 50%;
+  
+  margin: auto;
+  margin-left: 2%;
+}
+
+.more {
+  display: flex;
+}
+
+.loginitem a {
+  display: block;
+  text-decoration: none;
+  margin: auto;
+  height: 100px;
+}
+
 
 /* RWD */
 @media (max-width: 767px) {
   .header__buttons--desktop {
     display: none;
   }
-
+  
   /* Fix post medias indicators bugs on mobile */
   .post__medias {
     gap: 1px;
@@ -537,24 +645,23 @@ main section {
   }
 }
 
-
 @media (max-height: 512px) {
   .newpost_conten {
-      height: 70%;
-    }
-    .newpost_img {
-        height: 60%;
-    }
-    .newpost_para {
-        height: 40%;
-    }
-    
-    .newpost_footer {
+    height: 70%;
+  }
+  .newpost_img {
+    height: 60%;
+  }
+  .newpost_para {
+    height: 40%;
+  }
+
+  .newpost_footer {
     height: 15%;
   }
   .newpost_head {
-      height: 15%;
-    }
+    height: 15%;
+  }
 }
 
 @media (max-height: 300px) {
