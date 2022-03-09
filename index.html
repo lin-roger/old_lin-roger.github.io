@@ -21,11 +21,12 @@
     <script src="https://unpkg.com/vue@3"></script>
 
     <script type="module">
+        // window.location.href="http://127.0.0.1:5500/test.html";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
         //import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-analytics.js";
         import { getDatabase, ref, set, onValue, push, child, get } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js"
         import { getStorage, uploadBytes, ref as Sref, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js"
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js"
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js"
 
         const firebaseConfig = {
             apiKey: "AIzaSyCy5lslr5DMKgPjsHvlFR1BxgFrfyzfLJw",
@@ -39,15 +40,13 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        // const auth = getAuth();
         //const analytics = getAnalytics(app);
         const storage = getStorage(app);
         const auth = getAuth();
 
-
+        const user = auth.currentUser;
         const rdb = getDatabase(app);
         const starCountRef = ref(rdb, 'postimg');
-
         // function datacall(){
         //     get(starCountRef).then((result) => {
         //         console.log(result.val());
@@ -67,25 +66,14 @@
             });
         }
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                const uid = user.uid;
-                console.log(user)
-                // ...
-            } else {
-                // User is signed out
-                // ...
-            }
-        });
-
         const vapp = Vue.createApp({
             data() {
                 return {
                     visble: false,
                     logvis: false,
                     vh: true,
+
+                    userdata: null
                 }
             },
             methods: {
@@ -106,6 +94,17 @@
                     }
                 },
 
+            },
+            mounted() {
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        this.userdata = user.providerData;
+                        console.log(user.providerData);
+                        //updateProfile(auth.currentUser, {photoURL: "https://firebasestorage.googleapis.com/v0/b/test-2ae8c.appspot.com/o/userimg%2Fdefault-user.png?alt=media&token=31b38090-724e-43a6-9ab7-4e83ff979854"});
+                    } else {
+                        this.logvis = true;
+                    }
+                });
             },
         })
 
@@ -228,9 +227,9 @@
             methods: {
                 datacall() {
                     get(starCountRef).then((result) => {
-                        console.log('nuiwdc')
+                        //console.log('nuiwdc')
                         this.datalist = Object.values(result.val()).reverse();
-                        console.log(result.val());
+                        //console.log(result.val());
                     })
                 }
             },
@@ -299,9 +298,23 @@
                     get() {
                         if (Math.floor((Date.now() - this.time) / 1000) < 60) {
                             return String(Math.floor((Date.now() - this.time) / 1000) + ' 秒前');
-                        } else {
+                        }
+                        else if (Math.floor((Date.now() - this.time) / 1000 /60) < 60) {
                             return String(Math.floor((Date.now() - this.time) / 1000 / 60) + ' 分鐘前');
                         }
+                        else if (Math.floor((Date.now() - this.time) / 1000 /60/60) < 24) {
+                            return String(Math.floor((Date.now() - this.time) / 1000 / 60 / 60) + ' 小時前');
+                        }
+                        else if (Math.floor((Date.now() - this.time) / 1000 /60/60/24) < 7) {
+                            return String(Math.floor((Date.now() - this.time) / 1000 / 60 / 60/24) + ' 天前');
+                        }
+                        else if (Math.floor((Date.now() - this.time) / 1000 /60/60/24/7) < 4) {
+                            return String(Math.floor((Date.now() - this.time) / 1000 / 60 / 60/24/7) + ' 周前');
+                        }
+                        else {
+                            return Date(this.time);
+                        }
+
                     }
                 }
             },
@@ -417,7 +430,8 @@
             data() {
                 return {
                     email: '',
-                    password: ''
+                    password: '',
+                    src: ''
                 }
             },
             methods: {
@@ -428,22 +442,35 @@
                             const user = userCredential.user;
                             // ...
                             console.log(user);
+                            location.reload(true);
                         })
                         .catch((error) => {
                             const errorCode = error.code;
                             const errorMessage = error.message;
                         });
-                }
+                },
+                forget() {
+                    window.location.href = './forget.html';
+                },
+                newadmin() {
+                    window.location.href = './newadmin.html';
+                },
+                singout() {
+                    signOut(auth);
+                    location.reload(true);
+                },
+                datanull(data) {
+                    if (data) {
+                        return data;
+                    } else {
+                        return '沒有資料'
+                    }
+                },
             },
             template: `
-            <div class="fliter">
-                <div class="close">
-                    <button class="close-button" @click="$root.logvischange()">
-                        <i class="bi bi-x-lg" style="color: #fff;"></i>
-                    </button>
-                </div>
-                <div class="login">
-                    <form class="loginform" action="">
+            <div class="fliter" v-if='!$root.userdata' >
+                <div class="login" >
+                    <form class="loginform" action="$root.user">
                         <div class='loginitem' style='height:20%;'>
                             <h1>請登入<br>您的帳號</h1>
                         </div>
@@ -453,14 +480,33 @@
                         <div class='loginitem'>
                             <input v-model="password" type="password" placeholder="pasword" name="" autocomplete="on">
                         </div>
-                        <div class='loginitem'>
-                            <button class='loginck' @click.prevent="loginFN">登入</button>
-                        </div>
-                        <div class='loginitem more'>
-                            <button class='forgot' >忘記帳密</button>
-                            <button class='newadmin' >建立帳號</button>
+                        <div class='loginitem' style='margin-bottom: 0;'>
+                            <button type='submit' class='loginck' @click.prevent="loginFN">登入</button>
                         </div>
                     </form>
+                    <div class='more'>
+                        <button class='forgot' @click='forget' >忘記帳密</button>
+                        <button class='newadmin' @click='newadmin' >建立帳號</button>
+                    </div> 
+                </div>
+            </div>
+                
+            <div class="fliter" v-else >
+                <div class="close" >
+                    <button class="close-button" @click="$root.logvischange()">
+                        <i class="bi bi-x-lg" style="color: #fff;"></i>
+                    </button>
+                </div>
+                <div class="login">
+                    <div class="userimg">
+                        <img :src='$root.userdata[0].photoURL' alt="">
+                    </div>
+                    <div class="userdata">
+                        <p class='dataitem'>您已登入 {{ datanull($root.userdata[0].displayName) }}</p>
+                        <p class='dataitem'>email: {{datanull($root.userdata[0].email)}}</p>
+                        <p class='dataitem'>電話號碼: {{datanull($root.userdata[0].phoneNumber)}}</p>
+                        <button @click='singout' class='dataitem'>登出</button>
+                    </div>
                 </div>
             </div>
             `
@@ -473,47 +519,4 @@
 </body>
 
 </html>
-
-<!-- 
-<div class="post__likes">
-    <a href="#" class="post__likes-avatar">
-        <img src="../instagram-clone/assets/default-user.png" alt="User Picture" />
-    </a>
-
-    <span>Liked by
-        <a class="post__name--underline" href="#">user123</a> and
-        <a href="#">73 others</a></span>
-</div>
- -->
-
-
-<!-- <div class="fliter">
-    <div class="close">
-        <button class="close-button" @click="$root.visblechange()">
-            <i class="bi bi-x-lg" style="color: #fff;"></i>
-        </button>
-    </div>
-    <div class="newpost">
-        <div class="newpost_form">
-            <!-- <div class="newpost_head">
-                <div></div>
-                <p>新增貼文</p>
-                <div></div>
-            </div>
-            <div class="newpost_conten">
-                <div class="newpost_img" v-if="$root.vh">
-                    <div class="someth" v-if='imgshow'>
-                       <i class="bi bi-upload"></i>
-                       <p>把相片拖到這裡</p>
-                       <button class="btn btn-info" @click="$refs.file.click()">從電腦選擇相片</button>
-                       <input style="display:none" ref="file" type="file" @change="fileSelected">
-                    </div>
-                    <img v-else :src='src' alt="">
-                </div>
-                <div class="newpost_para">
-                    <textarea v-model='postpara' name="" id="" cols="30" rows="10" placeholder="撰寫貼文"></textarea>
-                </div>
-            </div>
-            <div class="newpost_footer">
-                <button @click='handleFileUpload()'>上傳</button>
-            </div> -->
+<!-- <p>{{  }}</p> -->
