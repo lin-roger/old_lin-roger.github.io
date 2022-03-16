@@ -466,6 +466,21 @@
                         return '沒有資料'
                     }
                 },
+                fileSelected(event) {
+                    this.file = event.target.files.item(0); //取得File物件
+                    const reader = new FileReader(); //建立FileReader 監聽 Load 事件
+                    reader.addEventListener('load', this.imageLoader);
+                    reader.readAsDataURL(this.file);
+                },
+                imageLoader(event) {
+                    this.src = event.target.result;
+                    this.imgshow = false;
+                    uploadBytes(Sref(storage, 'userimg/' + _uuid()), this.file).then((snapshot) => {
+                        getDownloadURL(snapshot.ref).then((url) => {
+                            
+                        });
+                    });
+                }
             },
             template: `
             <div class="fliter" v-if='!$root.userdata' >
@@ -499,7 +514,8 @@
                 </div>
                 <div class="login">
                     <div class="userimg">
-                        <img :src='$root.userdata[0].photoURL' alt="">
+                        <img :src='$root.userdata[0].photoURL' @click="$refs.file.click()" alt="">
+                        <input style="display:none" ref="file" type="file" @change="fileSelected">
                     </div>
                     <div class="userdata">
                         <p class='dataitem'>您已登入 {{ datanull($root.userdata[0].displayName) }}</p>
